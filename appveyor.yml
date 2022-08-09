@@ -5,22 +5,16 @@ platform: Any CPU
 build:
   verbosity: minimal
 after_build:
-- cmd: >-
-    7z a htaccess2Webconfig.zip %APPVEYOR_BUILD_FOLDER%\htaccess2Webconfig\bin\Release\*.*
-
+- cmd: 7z a htaccess2Webconfig.zip %APPVEYOR_BUILD_FOLDER%\htaccess2Webconfig\bin\Release\*.*
 artifacts:
-  - path: htaccess2Webconfig.zip
-    name: htaccess2Webconfig
-    type: zip
-
+- path: htaccess2Webconfig.zip
+  name: htaccess2Webconfig
 deploy:
+- provider: GitHub
   release: htaccess2Webconfig-v$(APPVEYOR_BUILD_VERSION)
-  description: 'Release description'
-  provider: GitHub
+  description: Release description
   auth_token:
-    secure: mrchthX5222OisS9nHqIqncf8OfDaPwqMS/SG5hhXaFodzF4UUmjOCZG7DJBPa8r
+    secure: BJFiPQhbi4Q9jbg6AYqI4Gy2W6B61y2tH9ggn2Jrj/c/yURY8dAmb9ULlkyTejQW
   artifact: /.*\.zip/
-  draft: false
-  prerelease: false
   on:
     branch: master
